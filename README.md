@@ -34,6 +34,9 @@ Crie um arquivo `dissertacao.txt` na raiz do seu repositório, dentro deste arqu
 
 > Os serviços de consulta de personagens, planetas e espécies e fornecido pelo The Star Wars API, a documentação pode ser acessada nesse link [https://swapi.co/documentation](https://swapi.co/documentation).
 
+Abaixo um exemplo de como sua aplicação deve se parecer. `challenge-mock-wireframe.jpg`
+![alt text](https://raw.githubusercontent.com/EarthW0rm/fullstack-challenge/master/challenge-mock-wireframe.jpg)
+
 ## Sua aplicação DEVE:
 * Deve autenticar o acesso aos métodos anônimos da aplicação Angular ao Backend C# utilizado OAuth2 Client credentials;
 * No filtro de espécies utilizar um componente de Typeahead;
