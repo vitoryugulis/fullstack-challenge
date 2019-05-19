@@ -17,12 +17,5 @@ namespace fullstack_challenge.Controllers
             var people = await service.GetPeople(query.Page);
             return Ok(people);
         }
-
-        // GET api/values/5
-        [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
-        {
-            return "value";
-        }
     }
 }

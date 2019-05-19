@@ -14,32 +14,40 @@ namespace fullstack_challenge.Services {
         string swapiUrl = "https://swapi.co/api/";
         private static readonly HttpClient client = new HttpClient();
 
-        public async Task<List<People>> GetPeople(int pageNumber){
+        public async Task<List<Person>> GetPeople(int pageNumber){
             var response = await GetPeopleFromSwapi(pageNumber);
-            return response;
+            var personList = TransformSwapiPeopleToPersonList(response);
+            return personList;
         }
 
-        private async Task<List<People>> GetPeopleFromSwapi(int pageNumber){
+        private async Task<string> GetPeopleFromSwapi(int pageNumber){
             string requestUrl = $"{swapiUrl}people/?page={pageNumber}";
             if(pageNumber == 0){
                 requestUrl = $"{swapiUrl}people/";
             }
             var response = await client.GetAsync(requestUrl);
-            var result = await response.Content.ReadAsStringAsync();
+            return await response.Content.ReadAsStringAsync();
+        }
 
-            SwapiPeople deserializedSwapiPeople = new SwapiPeople();  
-            MemoryStream ms = new MemoryStream(Encoding.UTF8.GetBytes(result));  
-            DataContractJsonSerializer ser = new DataContractJsonSerializer(deserializedSwapiPeople.GetType());  
-            deserializedSwapiPeople = ser.ReadObject(ms) as SwapiPeople;  
-            ms.Close();  
+        private List<Person> TransformSwapiPeopleToPersonList(string swapiPeopleResult){
+            var deserializedSwapiPeople = DeserializeSwapiPeopleResponse(swapiPeopleResult);
 
-            var peopleList = new List<People>();
-            foreach (var pp in deserializedSwapiPeople.results){
-                var people = Mapper.Map<People>(pp);
-                peopleList.Add(people);
+            var peopleList = new List<Person>();
+            foreach (var swapiPerson in deserializedSwapiPeople.results){
+                var person = Mapper.Map<Person>(swapiPerson);
+                peopleList.Add(person);
             }
 
             return peopleList;
+        }
+
+        private SwapiPeople DeserializeSwapiPeopleResponse(string SwapiResponse){
+            SwapiPeople deserializedSwapiPeople = new SwapiPeople();  
+            MemoryStream ms = new MemoryStream(Encoding.UTF8.GetBytes(SwapiResponse));  
+            DataContractJsonSerializer ser = new DataContractJsonSerializer(deserializedSwapiPeople.GetType());  
+            deserializedSwapiPeople = ser.ReadObject(ms) as SwapiPeople;  
+            ms.Close();  
+            return deserializedSwapiPeople;
         }
     }
 }

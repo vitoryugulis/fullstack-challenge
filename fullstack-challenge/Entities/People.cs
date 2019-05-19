@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 
 namespace fullstack_challenge.Entities{
     [DataContract]
-    public class People{
+    public class Person{
         [DataMember]
         public string Name { get; set; }
         [DataMember]
