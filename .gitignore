@@ -75,3 +75,7 @@ artifacts/
 
 # Visual Studio Trace Files
 *.e2e
+
+#Visual Studio Code
+
+.vscode

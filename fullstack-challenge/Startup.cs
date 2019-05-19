@@ -10,6 +10,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using fullstack_challenge.Services;
+using AutoMapper;
+using fullstack_challenge.Entities;
 
 namespace fullstack_challenge
 {
@@ -25,7 +28,18 @@ namespace fullstack_challenge
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc();
+
+            ConfigureDependencyInjection(services);
+            ConfigureAutoMapper();
+        }
+
+        private void ConfigureDependencyInjection(IServiceCollection services){
+            services.AddTransient<IPeopleService, PeopleService>();
+        }
+
+        private void ConfigureAutoMapper(){
+            Mapper.Initialize(cfg => cfg.CreateMap<SwapiPeople, People>());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
