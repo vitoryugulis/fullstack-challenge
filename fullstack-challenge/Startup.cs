@@ -39,7 +39,7 @@ namespace fullstack_challenge
         }
 
         private void ConfigureAutoMapper(){
-            Mapper.Initialize(cfg => cfg.CreateMap<SwapiPeople, People>());
+            Mapper.Initialize(cfg => cfg.CreateMap<SwapiPerson, Person>());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

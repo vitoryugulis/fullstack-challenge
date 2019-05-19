@@ -30,10 +30,10 @@ namespace fullstack_challenge.Services {
         }
 
         private List<Person> TransformSwapiPeopleToPersonList(string swapiPeopleResult){
-            var deserializedSwapiPeople = DeserializeSwapiPeopleResponse(swapiPeopleResult);
+            var deserializedSwapiPeopleResponse = DeserializeSwapiPeopleResponse(swapiPeopleResult);
 
             var peopleList = new List<Person>();
-            foreach (var swapiPerson in deserializedSwapiPeople.results){
+            foreach (var swapiPerson in deserializedSwapiPeopleResponse.results){
                 var person = Mapper.Map<Person>(swapiPerson);
                 peopleList.Add(person);
             }
@@ -41,13 +41,13 @@ namespace fullstack_challenge.Services {
             return peopleList;
         }
 
-        private SwapiPeople DeserializeSwapiPeopleResponse(string SwapiResponse){
-            SwapiPeople deserializedSwapiPeople = new SwapiPeople();  
+        private SwapiPeopleResponse DeserializeSwapiPeopleResponse(string SwapiResponse){
+            SwapiPeopleResponse deserializedSwapiPeopleResponse = new SwapiPeopleResponse();  
             MemoryStream ms = new MemoryStream(Encoding.UTF8.GetBytes(SwapiResponse));  
-            DataContractJsonSerializer ser = new DataContractJsonSerializer(deserializedSwapiPeople.GetType());  
-            deserializedSwapiPeople = ser.ReadObject(ms) as SwapiPeople;  
+            DataContractJsonSerializer ser = new DataContractJsonSerializer(deserializedSwapiPeopleResponse.GetType());  
+            deserializedSwapiPeopleResponse = ser.ReadObject(ms) as SwapiPeopleResponse;  
             ms.Close();  
-            return deserializedSwapiPeople;
+            return deserializedSwapiPeopleResponse;
         }
     }
 }

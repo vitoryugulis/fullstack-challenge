@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 
 namespace fullstack_challenge.Services{
-    public class Results
+    public class SwapiPerson
     {
         public string name { get; set; }
         public string height { get; set; }
@@ -22,11 +22,11 @@ namespace fullstack_challenge.Services{
         public string url { get; set; }
     }
 
-    public class SwapiPeople
+    public class SwapiPeopleResponse
     {
         public int count { get; set; }
         public string next { get; set; }
         public object previous { get; set; }
-        public List<Results> results { get; set; }
+        public List<SwapiPerson> results { get; set; }
     }
 }
