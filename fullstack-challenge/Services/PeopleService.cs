@@ -2,6 +2,7 @@ using AutoMapper;
 using fullstack_challenge.Entities;
 using fullstack_challenge.Services.Interfaces;
 using fullstack_challenge.Services.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -38,7 +39,7 @@ namespace fullstack_challenge.Services {
         }
 
         private async Task<List<Person>> TransformSwapiPeopleToPersonList(string swapiPeopleResult){
-            var deserializedSwapiPeopleResponse = DeserializeSwapiPeopleResponse(swapiPeopleResult);
+            var deserializedSwapiPeopleResponse = JsonConvert.DeserializeObject<SwapiPeopleResponse>(swapiPeopleResult);
 
             var peopleList = new List<Person>();
             foreach (var swapiPerson in deserializedSwapiPeopleResponse.results){
@@ -49,15 +50,6 @@ namespace fullstack_challenge.Services {
             }
 
             return peopleList;
-        }
-
-        private SwapiPeopleResponse DeserializeSwapiPeopleResponse(string SwapiResponse){
-            SwapiPeopleResponse deserializedSwapiPeopleResponse = new SwapiPeopleResponse();  
-            MemoryStream ms = new MemoryStream(Encoding.UTF8.GetBytes(SwapiResponse));  
-            DataContractJsonSerializer ser = new DataContractJsonSerializer(deserializedSwapiPeopleResponse.GetType());  
-            deserializedSwapiPeopleResponse = ser.ReadObject(ms) as SwapiPeopleResponse;  
-            ms.Close();  
-            return deserializedSwapiPeopleResponse;
         }
     }
 }
