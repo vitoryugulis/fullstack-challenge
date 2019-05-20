@@ -39,6 +39,7 @@ namespace fullstack_challenge
         private void ConfigureDependencyInjection(IServiceCollection services){
             services.AddTransient<IPeopleService, PeopleService>();
             services.AddTransient<IPlanetService, PlanetService>();
+            services.AddTransient<ISpeciesService, SpeciesService>();
         }
 
         private void ConfigureAutoMapper(){

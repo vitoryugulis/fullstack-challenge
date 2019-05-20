@@ -17,10 +17,12 @@ namespace fullstack_challenge.Services {
         string swapiUrl = "https://swapi.co/api/";
         private static readonly HttpClient client = new HttpClient();
         private readonly IPlanetService planetService;
+        private readonly ISpeciesService speciesService;
 
-        public PeopleService(IPlanetService planetService)
+        public PeopleService(IPlanetService planetService, ISpeciesService speciesService)
         {
             this.planetService = planetService;
+            this.speciesService = speciesService;
         }
 
         public async Task<List<Person>> GetPeople(int pageNumber){
@@ -44,12 +46,26 @@ namespace fullstack_challenge.Services {
             var peopleList = new List<Person>();
             foreach (var swapiPerson in deserializedSwapiPeopleResponse.results){
                 var person = Mapper.Map<Person>(swapiPerson);
-                var swapiPlanet = await planetService.GetPlanet(person.Homeworld);
-                person.Homeworld = swapiPlanet.name;
+                person.Homeworld = await GetPlanetName(person.Homeworld);
+                person.Species = await GetSpeciesNameList(person.Species);
                 peopleList.Add(person);
             }
 
             return peopleList;
+        }
+
+        private async Task<string> GetPlanetName(string planetUrl){
+            var swapiPlanet = await planetService.GetPlanet(planetUrl);
+            return swapiPlanet.name;
+        }
+
+        private async Task<List<string>> GetSpeciesNameList(List<string> personSpeciesUrls){
+            var speciesNameList = new List<string>();
+            foreach(var speciesUrl in personSpeciesUrls){
+                var swapiSpecies = await speciesService.GetSpecies(speciesUrl);
+                speciesNameList.Add(swapiSpecies.name);
+            }
+            return speciesNameList;
         }
     }
 }
