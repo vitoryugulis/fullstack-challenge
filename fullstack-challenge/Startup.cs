@@ -13,6 +13,8 @@ using Microsoft.Extensions.Options;
 using fullstack_challenge.Services;
 using AutoMapper;
 using fullstack_challenge.Entities;
+using fullstack_challenge.Services.Interfaces;
+using fullstack_challenge.Services.Models;
 
 namespace fullstack_challenge
 {
@@ -36,6 +38,7 @@ namespace fullstack_challenge
 
         private void ConfigureDependencyInjection(IServiceCollection services){
             services.AddTransient<IPeopleService, PeopleService>();
+            services.AddTransient<IPlanetService, PlanetService>();
         }
 
         private void ConfigureAutoMapper(){

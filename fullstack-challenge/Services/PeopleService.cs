@@ -1,5 +1,7 @@
 using AutoMapper;
 using fullstack_challenge.Entities;
+using fullstack_challenge.Services.Interfaces;
+using fullstack_challenge.Services.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -13,10 +15,16 @@ namespace fullstack_challenge.Services {
 
         string swapiUrl = "https://swapi.co/api/";
         private static readonly HttpClient client = new HttpClient();
+        private readonly IPlanetService planetService;
+
+        public PeopleService(IPlanetService planetService)
+        {
+            this.planetService = planetService;
+        }
 
         public async Task<List<Person>> GetPeople(int pageNumber){
             var response = await GetPeopleFromSwapi(pageNumber);
-            var personList = TransformSwapiPeopleToPersonList(response);
+            var personList = await TransformSwapiPeopleToPersonList(response);
             return personList;
         }
 
@@ -29,12 +37,14 @@ namespace fullstack_challenge.Services {
             return await response.Content.ReadAsStringAsync();
         }
 
-        private List<Person> TransformSwapiPeopleToPersonList(string swapiPeopleResult){
+        private async Task<List<Person>> TransformSwapiPeopleToPersonList(string swapiPeopleResult){
             var deserializedSwapiPeopleResponse = DeserializeSwapiPeopleResponse(swapiPeopleResult);
 
             var peopleList = new List<Person>();
             foreach (var swapiPerson in deserializedSwapiPeopleResponse.results){
                 var person = Mapper.Map<Person>(swapiPerson);
+                var swapiPlanet = await planetService.GetPlanet(person.Homeworld);
+                person.Homeworld = swapiPlanet.name;
                 peopleList.Add(person);
             }
 

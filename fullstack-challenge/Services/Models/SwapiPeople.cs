@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace fullstack_challenge.Services{
+namespace fullstack_challenge.Services.Models{
     public class SwapiPerson
     {
         public string name { get; set; }
