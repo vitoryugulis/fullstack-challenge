@@ -1,7 +1,7 @@
 using AutoMapper;
-using fullstack_challenge.Entities;
-using fullstack_challenge.Services.Interfaces;
-using fullstack_challenge.Services.Models;
+using Core.Interfaces;
+using Core.Entities;
+using Core.Services.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -11,7 +11,7 @@ using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace fullstack_challenge.Services {
+namespace Core.Services {
     public class PeopleService : IPeopleService{
 
         string swapiUrl = "https://swapi.co/api/";

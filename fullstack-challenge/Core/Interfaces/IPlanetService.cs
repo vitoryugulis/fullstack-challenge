@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
-using fullstack_challenge.Services.Models;
+using Core.Services.Models;
 
-namespace fullstack_challenge.Services.Interfaces
+namespace Core.Interfaces
 {
     public interface IPlanetService
     {

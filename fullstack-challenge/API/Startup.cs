@@ -10,13 +10,13 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using fullstack_challenge.Services;
+using Core.Services;
 using AutoMapper;
-using fullstack_challenge.Entities;
-using fullstack_challenge.Services.Interfaces;
-using fullstack_challenge.Services.Models;
+using Core.Entities;
+using Core.Interfaces;
+using Core.Services.Models;
 
-namespace fullstack_challenge
+namespace API
 {
     public class Startup
     {

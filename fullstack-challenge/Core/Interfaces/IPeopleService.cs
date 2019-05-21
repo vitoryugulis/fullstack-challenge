@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using fullstack_challenge.Entities;
+using Core.Entities;
 
-namespace fullstack_challenge.Services.Interfaces{
+namespace Core.Interfaces{
     public interface IPeopleService
     {
         Task<List<Person>> GetPeople(int pageNumber);

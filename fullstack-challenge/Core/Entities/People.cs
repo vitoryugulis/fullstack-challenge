@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 
-namespace fullstack_challenge.Entities{
+namespace Core.Entities{
     [DataContract]
     public class Person{
         [DataMember]

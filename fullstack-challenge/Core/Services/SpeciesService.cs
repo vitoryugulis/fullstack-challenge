@@ -3,11 +3,11 @@ using System.Net.Http;
 using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading.Tasks;
-using fullstack_challenge.Services.Interfaces;
-using fullstack_challenge.Services.Models;
+using Core.Interfaces;
+using Core.Services.Models;
 using Newtonsoft.Json;
 
-namespace fullstack_challenge.Services
+namespace Core.Services
 {
     public class SpeciesService : ISpeciesService
     {
