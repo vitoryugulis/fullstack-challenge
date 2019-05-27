@@ -13,13 +13,15 @@ namespace Core.Services
     {
         private static readonly HttpClient client = new HttpClient();
 
-        public async Task<SwapiSpecies> GetSpecies(string speciesUrl){
+        public async Task<SwapiSpecies> GetSpecies(string speciesUrl)
+        {
             var jsonResponse = await GetSpeciesFromSwapi(speciesUrl);
             var swapiSpecies = JsonConvert.DeserializeObject<SwapiSpecies>(jsonResponse);
             return swapiSpecies;
         }
 
-        private async Task<string> GetSpeciesFromSwapi(string speciesUrl){
+        private async Task<string> GetSpeciesFromSwapi(string speciesUrl)
+        {
             var response = await client.GetAsync(speciesUrl);
             return await response.Content.ReadAsStringAsync();
         }
