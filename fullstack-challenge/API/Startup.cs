@@ -31,6 +31,15 @@ namespace API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.AddAuthorization();
+
+            services.AddAuthentication("Bearer")
+                        .AddJwtBearer("Bearer", options => 
+                        {
+                            options.Authority = "http://localhost:5002";
+                            options.RequireHttpsMetadata = false;
+                            options.Audience = "fscapi";
+                        });
 
             ConfigureDependencyInjection(services);
             ConfigureAutoMapper();
@@ -59,6 +68,7 @@ namespace API
                 app.UseHsts();
             }
 
+            app.UseAuthentication();
             app.UseHttpsRedirection();
             app.UseMvc();
         }

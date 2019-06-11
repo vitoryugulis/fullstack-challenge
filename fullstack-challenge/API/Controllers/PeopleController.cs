@@ -4,16 +4,17 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Core.Interfaces;
-using API.Controllers.Models;
+using API.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace API.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]
+    [Authorize]
     public class PeopleController : ControllerBase
     {
         [HttpGet]
-        public async Task<IActionResult> GetPeople([FromServices] IPeopleService service, [FromQuery] GetPeopleBindingModel query)
+        public async Task<IActionResult> GetPeople([FromServices] IPeopleService service, [FromQuery] PeopleBindingModel query)
         {
             var people = await service.GetPeople(query.Page);
             return Ok(people);
