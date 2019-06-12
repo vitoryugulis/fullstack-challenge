@@ -16,7 +16,7 @@ namespace API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetPeople([FromServices] IPeopleService service, [FromQuery] PeopleBindingModel query)
         {
-            var people = await service.GetPeople(query.Page);
+            var people = await service.GetAllPeople(query.Page);
             return Ok(people);
         }
     }

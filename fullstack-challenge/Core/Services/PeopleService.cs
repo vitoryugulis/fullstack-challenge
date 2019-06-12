@@ -19,30 +19,30 @@ namespace Core.Services
         string swapiUrl = "https://swapi.co/api/";
         private static readonly HttpClient client = new HttpClient();
         private readonly IPlanetService planetService;
-        private readonly ISpeciesService speciesService;
+        private IMapper mapper;
 
-        public PeopleService(IPlanetService planetService, ISpeciesService speciesService)
+        public PeopleService(IPlanetService planetService, IMapper mapper)
         {
             this.planetService = planetService;
-            this.speciesService = speciesService;
+            this.mapper = mapper;
         }
 
-        public async Task<List<Person>> GetPeople(int pageNumber)
+        public async Task<List<Person>> GetAllPeople(int pageNumber)
         {
-            var response = await GetPeopleFromSwapi(pageNumber);
+            var response = await GetAllPeopleFromSwapi(pageNumber);
             var personList = await TransformSwapiPeopleToPersonList(response);
             return personList;
         }
 
-        private async Task<string> GetPeopleFromSwapi(int pageNumber)
+        private async Task<string> GetAllPeopleFromSwapi(int pageNumber)
         {
             string requestUrl = $"{swapiUrl}people/?page={pageNumber}";
             if (pageNumber == 0)
             {
                 requestUrl = $"{swapiUrl}people/";
             }
-            var response = await client.GetAsync(requestUrl); 
-            return await response.Content.ReadAsStringAsync();
+            var response = await client.GetStringAsync(requestUrl);
+            return response;
         }
 
         private async Task<List<Person>> TransformSwapiPeopleToPersonList(string swapiPeopleResult)
@@ -50,18 +50,23 @@ namespace Core.Services
             var deserializedSwapiPeopleResponse = JsonConvert.DeserializeObject<SwapiPeopleResponse>(swapiPeopleResult);
 
             var peopleList = new List<Person>();
-            if(deserializedSwapiPeopleResponse.results != null)
+            if (deserializedSwapiPeopleResponse.results != null)
             {
                 foreach (var swapiPerson in deserializedSwapiPeopleResponse.results)
                 {
-                    var person = Mapper.Map<Person>(swapiPerson);
-                    person.Homeworld = await GetPlanetName(person.Homeworld);
-                    person.Species = await GetSpeciesNameList(person.Species);
+                    var person = await CompletePersonInfo(swapiPerson);
                     peopleList.Add(person);
                 }
             }
 
             return peopleList;
+        }
+
+        private async Task<Person> CompletePersonInfo(SwapiPerson swapiPerson)
+        {
+            var person = mapper.Map<SwapiPerson, Person>(swapiPerson);
+            person.Homeworld = await GetPlanetName(person.Homeworld);
+            return person;
         }
 
         private async Task<string> GetPlanetName(string planetUrl)
@@ -70,15 +75,11 @@ namespace Core.Services
             return swapiPlanet.name;
         }
 
-        private async Task<List<string>> GetSpeciesNameList(List<string> personSpeciesUrls)
+        public async Task<SwapiPerson> GetPersonByUrl(string personUrl)
         {
-            var speciesNameList = new List<string>();
-            foreach (var speciesUrl in personSpeciesUrls)
-            {
-                var swapiSpecies = await speciesService.GetSpecies(speciesUrl);
-                speciesNameList.Add(swapiSpecies.name);
-            }
-            return speciesNameList;
+            var response = await client.GetStringAsync(personUrl);
+            var person = JsonConvert.DeserializeObject<SwapiPerson>(response);
+            return person;
         }
     }
 }

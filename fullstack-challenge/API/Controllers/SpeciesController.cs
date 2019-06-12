@@ -1,0 +1,20 @@
+using System.Threading.Tasks;
+using API.Models;
+using Core.Interfaces;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+
+namespace API.Controllers
+{
+    [Route("api/[controller]")]
+    [Authorize]
+    public class SpeciesController : ControllerBase
+    {
+        [HttpGet]
+        public async Task<IActionResult> GetSpecies([FromServices] ISpeciesService service, [FromQuery] SpeciesBindingModel model)
+        {
+            var species = await service.GetAllSpecies(model.page);
+            return Ok(species);
+        }
+    }
+}

@@ -20,4 +20,12 @@ namespace Core.Services.Models
         public string edited { get; set; }
         public string url { get; set; }
     }
+
+    public class SwapiSpeciesResponse
+    {
+        public int count { get; set; }
+        public string next { get; set; }
+        public object previous { get; set; }
+        public List<SwapiSpecies> results { get; set; }
+    }
 }
