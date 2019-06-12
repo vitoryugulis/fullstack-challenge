@@ -3,7 +3,11 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  authorization_server_url: "http://localhost:5002/api/authorization",
+  client_secret: "fsca",
+  client_id: "fullstack-challenge-api",
+  fullstack_challenge_api: "http://localhost:5000/api/",
 };
 
 /*
