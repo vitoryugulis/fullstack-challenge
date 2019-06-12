@@ -15,6 +15,7 @@ using AutoMapper;
 using Core.Entities;
 using Core.Interfaces;
 using Core.Services.Models;
+using Core.AutoMapper;
 
 namespace API
 {
@@ -42,7 +43,7 @@ namespace API
                         });
 
             ConfigureDependencyInjection(services);
-            ConfigureAutoMapper();
+            ConfigureAutoMapper(services);
         }
 
         private void ConfigureDependencyInjection(IServiceCollection services){
@@ -51,8 +52,9 @@ namespace API
             services.AddTransient<ISpeciesService, SpeciesService>();
         }
 
-        private void ConfigureAutoMapper(){
-            Mapper.Initialize(cfg => cfg.CreateMap<SwapiPerson, Person>());
+        private void ConfigureAutoMapper(IServiceCollection services){
+            var mapper = AutoMapperConfiguration.Configure();
+            services.AddSingleton(mapper);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

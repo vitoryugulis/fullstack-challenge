@@ -22,8 +22,8 @@ namespace Core.Services
 
         private async Task<string> GetPlanetFromSwapi(string planetUrl)
         {
-            var response = await client.GetAsync(planetUrl);
-            return await response.Content.ReadAsStringAsync();
+            var response = await client.GetStringAsync(planetUrl);
+            return response;
         }
     }
 }
