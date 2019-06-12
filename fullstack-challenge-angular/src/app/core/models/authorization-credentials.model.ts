@@ -1,4 +1,5 @@
 export interface AuthorizationCredentials{
-    client_id: string;
-    client_secret: string;
+    clientId: string;
+    clientSecret: string;
+    scope: string;
 }

@@ -14,8 +14,9 @@ export class AuthorizationService {
 
   getAccessToken() : Observable<AuthorizationServerResponse>{
     const credentials: AuthorizationCredentials = {
-      client_id : environment.client_id,
-      client_secret : environment.client_secret
+      clientId : environment.client_id,
+      clientSecret : environment.client_secret,
+      scope: environment.scope
     }
     return this.http.post<AuthorizationServerResponse>(environment.authorization_server_url, credentials);
   }

@@ -7,6 +7,7 @@ export const environment = {
   authorization_server_url: "http://localhost:5002/api/authorization",
   client_secret: "fsca",
   client_id: "fullstack-challenge-api",
+  scope: "fscapi",
   fullstack_challenge_api: "http://localhost:5000/api/",
 };
 
