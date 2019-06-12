@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { SpeciesComponent } from './components/species/species.component';
 import { AngularMaterialConfigurationModule } from './angular-material-configuration/angular-material-configuration.module';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { AngularMaterialConfigurationModule } from './angular-material-configura
     AppRoutingModule,
     CoreModule,
     BrowserAnimationsModule,
-    AngularMaterialConfigurationModule
+    AngularMaterialConfigurationModule,
+    NgbModule 
   ],
   providers: [],
   bootstrap: [AppComponent]
