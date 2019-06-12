@@ -87,18 +87,18 @@ identityserver4_log.txt
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # compiled output
-/dist
-/tmp
-/out-tsc
+fullstack-challenge-angular/dist
+fullstack-challenge-angular/tmp
+fullstack-challenge-angular/out-tsc
 # Only exists if Bazel was run
-/bazel-out
+fullstack-challenge-angular/bazel-out
 
 # dependencies
-/node_modules
+fullstack-challenge-angular/node_modules
 
 # profiling files
-chrome-profiler-events.json
-speed-measure-plugin.json
+fullstack-challenge-angular/chrome-profiler-events.json
+fullstack-challenge-angular/speed-measure-plugin.json
 
 # IDEs and editors
 /.idea
@@ -118,15 +118,15 @@ speed-measure-plugin.json
 .history/*
 
 # misc
-/.sass-cache
-/connect.lock
-/coverage
-/libpeerconnection.log
-npm-debug.log
-yarn-error.log
-testem.log
-/typings
+fullstack-challenge-angular/.sass-cache
+fullstack-challenge-angular/connect.lock
+fullstack-challenge-angular/coverage
+fullstack-challenge-angular/libpeerconnection.log
+fullstack-challenge-angular/npm-debug.log
+fullstack-challenge-angular/yarn-error.log
+fullstack-challenge-angular/testem.log
+fullstack-challenge-angular/typings
 
 # System Files
-.DS_Store
-Thumbs.db
+fullstack-challenge-angular/.DS_Store
+fullstack-challenge-angular/Thumbs.db
