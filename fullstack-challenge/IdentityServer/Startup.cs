@@ -8,6 +8,7 @@ using IdentityServer.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace IdentityServer
 {
@@ -28,6 +29,7 @@ namespace IdentityServer
             });
             services.AddMvc().SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_2_1);
 
+            AddSwagger(services);
             services.AddTransient<IAuthorizationService, AuthorizationService>();
 
             var builder = services.AddIdentityServer()
@@ -45,9 +47,21 @@ namespace IdentityServer
             }
         }
 
+        private void AddSwagger(IServiceCollection services){
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info { Title = "Authorization API", Version = "v1" });
+            });
+        }
+
         public void Configure(IApplicationBuilder app)
         {
-
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Authorization API v1");
+                c.RoutePrefix = string.Empty;
+            });
             app.UseCors("AllowAnyOrigin");
             app.UseIdentityServer();
             app.UseMvcWithDefaultRoute();
