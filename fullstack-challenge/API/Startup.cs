@@ -16,6 +16,7 @@ using Core.Entities;
 using Core.Interfaces;
 using Core.Services.Models;
 using Core.AutoMapper;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace API
 {
@@ -46,8 +47,16 @@ namespace API
                             options.Audience = "fscapi";
                         });
 
+            AddSwagger(services);
             ConfigureDependencyInjection(services);
             ConfigureAutoMapper(services);
+        }
+
+        private void AddSwagger(IServiceCollection services){
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info { Title = "Fullstack Challenge API", Version = "v1" });
+            });
         }
 
         private void ConfigureDependencyInjection(IServiceCollection services){
@@ -73,7 +82,12 @@ namespace API
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Fullstack Challenge API v1");
+                c.RoutePrefix = string.Empty;
+            });
             app.UseCors("AllowAnyOrigin");
             app.UseAuthentication();
             app.UseHttpsRedirection();
