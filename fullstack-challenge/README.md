@@ -15,6 +15,7 @@ Windows:
 Linux Ubuntu (no link tem como escolher a distro do linux, caso o seu não seja ubuntu):
 
 .NET Core SDK 2.2 https://dotnet.microsoft.com/download/linux-package-manager/ubuntu18-04/sdk-current
+
 De preferência, abra o projeto utilizando o Visual Studio Code
 
 ## ASP.Net Core Identity Server (API de autorização)
