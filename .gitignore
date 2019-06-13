@@ -83,3 +83,50 @@ artifacts/
 #identity server
 tempkey.rsa
 identityserver4_log.txt
+
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# compiled output
+fullstack-challenge-angular/dist
+fullstack-challenge-angular/tmp
+fullstack-challenge-angular/out-tsc
+# Only exists if Bazel was run
+fullstack-challenge-angular/bazel-out
+
+# dependencies
+fullstack-challenge-angular/node_modules
+
+# profiling files
+fullstack-challenge-angular/chrome-profiler-events.json
+fullstack-challenge-angular/speed-measure-plugin.json
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/*
+
+# misc
+fullstack-challenge-angular/.sass-cache
+fullstack-challenge-angular/connect.lock
+fullstack-challenge-angular/coverage
+fullstack-challenge-angular/libpeerconnection.log
+fullstack-challenge-angular/npm-debug.log
+fullstack-challenge-angular/yarn-error.log
+fullstack-challenge-angular/testem.log
+fullstack-challenge-angular/typings
+
+# System Files
+fullstack-challenge-angular/.DS_Store
+fullstack-challenge-angular/Thumbs.db

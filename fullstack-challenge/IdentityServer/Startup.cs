@@ -22,6 +22,10 @@ namespace IdentityServer
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(c =>
+            {
+                c.AddPolicy("AllowAnyOrigin", options => options.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+            });
             services.AddMvc().SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_2_1);
 
             services.AddTransient<IAuthorizationService, AuthorizationService>();
@@ -43,14 +47,11 @@ namespace IdentityServer
 
         public void Configure(IApplicationBuilder app)
         {
-            if (Environment.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
 
+            app.UseCors("AllowAnyOrigin");
             app.UseIdentityServer();
-
             app.UseMvcWithDefaultRoute();
+            
         }
     }
 }

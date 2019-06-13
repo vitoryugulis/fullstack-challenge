@@ -26,6 +26,7 @@ namespace Core.Services.Models
         public int count { get; set; }
         public string next { get; set; }
         public object previous { get; set; }
+        public string detail { get; set; }
         public List<SwapiSpecies> results { get; set; }
     }
 }

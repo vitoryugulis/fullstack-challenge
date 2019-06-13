@@ -1,0 +1,20 @@
+table {
+    table-layout: fixed;
+    margin: 0 auto;
+}
+
+th, td {
+    overflow: hidden;
+    width: 200px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align: center !important;
+}
+
+.margin-top-2{
+    margin-top: 2%;
+}
+
+.container{
+    margin-top: 2%;
+}
