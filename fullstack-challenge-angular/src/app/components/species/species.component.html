@@ -1,25 +1,33 @@
-<div class="form-group">
-  <form>
-    <mat-form-field>
-      <input matInput id="typeahead-http" type="text" class="form-control" [class.is-invalid]="searchFailed"
-        [(ngModel)]="model" [ngbTypeahead]="search" placeholder="Species Search">
-      <span *ngIf="searching">searching...</span>
-      <div class="invalid-feedback" *ngIf="searchFailed">Sorry, suggestions could not be loaded.</div>
-    </mat-form-field>
-  </form>
-</div>
-<div>
-  <table #speciesTable mat-table [dataSource]="species" class="mat-elevation-z8">
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef> Species Name </th>
-      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-    </ng-container>
-    <ng-container matColumnDef="homeworld">
-      <th mat-header-cell *matHeaderCellDef> Homeworld </th>
-      <td mat-cell *matCellDef="let element"> {{element.homeworld}} </td>
-    </ng-container>
-    
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
+<div class="container">
+  <div class="row">
+    <ng-template #rt let-r="result" let-t="term">
+      <div class="row">
+        <div class="col-lg-4 align-self-center">
+          <ngb-highlight [result]="r.name" [term]="t"></ngb-highlight>
+          ({{r.homeworld}})
+        </div>
+      </div>
+    </ng-template>
+    <input id="typeahead-http" type="text" class="form-control width-50" [class.is-invalid]="searchFailed"
+      [(ngModel)]="species" [ngbTypeahead]="search" placeholder="Species Search" [resultTemplate]="rt"
+      [inputFormatter]="formatter" (selectItem)="selectedItem($event.item)">
+    <span *ngIf="searching">searching...</span>
+    <div class="invalid-feedback" *ngIf="searchFailed">Sorry, suggestions could not be loaded.</div>
+  </div>
+  <div class="row">
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Homeworld</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let person of people">
+          <td>{{ person.name }}</td>
+          <td>{{ person.homeworld }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

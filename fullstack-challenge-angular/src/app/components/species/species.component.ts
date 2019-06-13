@@ -4,6 +4,8 @@ import { Species } from 'src/app/core/models/species.model';
 import { PaginatedSpecies } from 'src/app/core/models/paginated-species.model';
 import { Observable, of, from, defer } from 'rxjs';
 import { catchError, debounceTime, distinctUntilChanged, map, tap, switchMap, mergeMap } from 'rxjs/operators';
+import { SelectorMatcher } from '@angular/compiler';
+import { Person } from 'src/app/core/models/person.model';
 
 @Component({
   selector: 'app-species',
@@ -18,14 +20,20 @@ export class SpeciesComponent implements OnInit {
   searching = false;
   searchFailed = false;
   model: any;
-  species : Species[] = [];
+  species : Species;
+  totalResults : number;
+  people : Person[] = [];
 
   constructor(private speciesService: SpeciesService) { }
 
   async ngOnInit() {
   }
 
-
+  selectedItem(species : Species){
+    if(species != undefined && species.persons != undefined){
+      this.people = species.persons;
+    }
+  }
 
   search = (text$: Observable<string>) =>
     text$.pipe(
@@ -36,12 +44,8 @@ export class SpeciesComponent implements OnInit {
         this.speciesService.getSpeciesByName(term).pipe(
           tap(() => this.searchFailed = false),
           map(result => {
-            let speciesNamesAndHomeworlds: string[] = [];
-            this.species = result.species;
-            result.species.forEach(speciesList =>{
-              speciesNamesAndHomeworlds.push(`${speciesList.name} (${speciesList.homeworld})`)
-            })
-            return speciesNamesAndHomeworlds;
+            this.totalResults = result.totalResults;
+            return result.species;
           }),
           catchError(() => {
             this.searchFailed = true;
@@ -50,5 +54,7 @@ export class SpeciesComponent implements OnInit {
       ),
       tap(() => this.searching = false)
     )
+
+    formatter = (x : Species) => `${x.name} (${x.homeworld})`;
 
 }

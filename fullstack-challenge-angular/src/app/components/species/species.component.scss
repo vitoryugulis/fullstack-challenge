@@ -1,6 +1,6 @@
 table {
-    width: 75%;
     table-layout: fixed;
+    margin: 0 auto;
 }
 
 th, td {
@@ -9,4 +9,12 @@ th, td {
     text-overflow: ellipsis;
     white-space: nowrap;
     text-align: center !important;
+}
+
+.margin-top-2{
+    margin-top: 2%;
+}
+
+.container{
+    margin-top: 2%;
 }
