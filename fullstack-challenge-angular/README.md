@@ -7,8 +7,8 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Requisitos
 
-1. Angular CLI https://cli.angular.io/
-1. Node.js 10.16.0 https://nodejs.org/en/
+1. [Angular CLI](https://cli.angular.io/)
+1. [Node.js 10.16.0](https://nodejs.org/en/)
 
 ## Subindo a página
 
