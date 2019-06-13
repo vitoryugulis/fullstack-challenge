@@ -36,7 +36,7 @@ namespace Core.Services
             return swapiSpecies;
         }
 
-        public async Task<List<Species>> GetAllSpecies(int pageNumber)
+        public async Task<PaginatedSpecies> GetAllSpecies(int pageNumber)
         {
             var swapiSpeciesResponse = await GetAllSpeciesFromSwapi(pageNumber);
             var speciesList = new List<Species>();
@@ -45,7 +45,11 @@ namespace Core.Services
                 var species = await GetSpeciesFullInfo(swapiSpecies);
                 speciesList.Add(species);
             }
-            return speciesList;
+            var paginatedSpecies = new PaginatedSpecies{
+                TotalResults = swapiSpeciesResponse.count,
+                Species = speciesList
+            };
+            return paginatedSpecies;
         }
 
         private async Task<SwapiSpeciesResponse> GetAllSpeciesFromSwapi(int pageNumber)
@@ -86,6 +90,33 @@ namespace Core.Services
         {
             var swapiPlanet = await planetService.GetPlanet(planetUrl);
             return swapiPlanet.name;
+        }
+
+        public async Task<PaginatedSpecies> GetSpeciesByName(string name, int page)
+        {
+            var swapiSpeciesResponse = await SearchSpeciesByNameFromSwapi(name, page);
+            var speciesList = new List<Species>();
+            foreach (var swapiSpecies in swapiSpeciesResponse.results)
+            {
+                var species = await GetSpeciesFullInfo(swapiSpecies);
+                speciesList.Add(species);
+            }
+            var paginatedSpecies = new PaginatedSpecies{
+                TotalResults = swapiSpeciesResponse.count,
+                Species = speciesList
+            };
+            return paginatedSpecies;
+        }
+
+        private async Task<SwapiSpeciesResponse> SearchSpeciesByNameFromSwapi(string name, int page)
+        {
+            string requestUrl = $"{swapiUrl}species/?search={name}";
+            if(page != 0)
+                requestUrl = $"{requestUrl}&page={page}";
+            var response = await client.GetStringAsync(requestUrl);
+
+            var swapiSpeciesResponse = JsonConvert.DeserializeObject<SwapiSpeciesResponse>(response);
+            return swapiSpeciesResponse;
         }
     }
 }
