@@ -23,11 +23,21 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let person of people">
+        <tr *ngFor="let person of people | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
           <td>{{ person.name }}</td>
           <td>{{ person.homeworld }}</td>
         </tr>
       </tbody>
     </table>
+    <div *ngIf="totalResults != 0" class="d-flex justify-content-between p-2">
+      <ngb-pagination [collectionSize]="totalResults" [(page)]="page" [pageSize]="pageSize">
+      </ngb-pagination>
+
+      <select class="custom-select" style="width: auto" [(ngModel)]="pageSize">
+        <option [ngValue]="2">2 items per page</option>
+        <option [ngValue]="4">4 items per page</option>
+        <option [ngValue]="6">6 items per page</option>
+      </select>
+    </div>
   </div>
 </div>

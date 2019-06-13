@@ -21,8 +21,10 @@ export class SpeciesComponent implements OnInit {
   searchFailed = false;
   model: any;
   species : Species;
-  totalResults : number;
+  totalResults : number = 0;
   people : Person[] = [];
+  pageSize = 4;
+  page = 1;
 
   constructor(private speciesService: SpeciesService) { }
 
@@ -31,10 +33,11 @@ export class SpeciesComponent implements OnInit {
 
   selectedItem(species : Species){
     if(species != undefined && species.persons != undefined){
+      this.totalResults = species.persons.length;
       this.people = species.persons;
     }
   }
-
+  
   search = (text$: Observable<string>) =>
     text$.pipe(
       debounceTime(300),
@@ -44,7 +47,6 @@ export class SpeciesComponent implements OnInit {
         this.speciesService.getSpeciesByName(term).pipe(
           tap(() => this.searchFailed = false),
           map(result => {
-            this.totalResults = result.totalResults;
             return result.species;
           }),
           catchError(() => {
