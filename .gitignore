@@ -1,0 +1,132 @@
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# User-specific files (MonoDevelop/Xamarin Studio)
+*.userprefs
+
+# Mono auto generated files
+mono_crash.*
+
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+
+# Visual Studio 2015/2017 cache/options directory
+.vs/
+# Uncomment if you have tasks that create the project's static files in wwwroot
+#wwwroot/
+
+# Visual Studio 2017 auto generated files
+Generated\ Files/
+
+# .NET Core
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Files built by Visual Studio
+*_i.c
+*_p.c
+*_h.h
+*.ilk
+*.meta
+*.obj
+*.iobj
+*.pch
+*.pdb
+*.ipdb
+*.pgc
+*.pgd
+*.rsp
+*.sbr
+*.tlb
+*.tli
+*.tlh
+*.tmp
+*.tmp_proj
+*_wpftmp.csproj
+*.log
+*.vspscc
+*.vssscc
+.builds
+*.pidb
+*.svclog
+*.scc
+
+# Visual Studio profiler
+*.psess
+*.vsp
+*.vspx
+*.sap
+
+# Visual Studio Trace Files
+*.e2e
+
+#Visual Studio Code
+
+.vscode
+
+#identity server
+tempkey.rsa
+identityserver4_log.txt
+
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# compiled output
+fullstack-challenge-angular/dist
+fullstack-challenge-angular/tmp
+fullstack-challenge-angular/out-tsc
+# Only exists if Bazel was run
+fullstack-challenge-angular/bazel-out
+
+# dependencies
+fullstack-challenge-angular/node_modules
+
+# profiling files
+fullstack-challenge-angular/chrome-profiler-events.json
+fullstack-challenge-angular/speed-measure-plugin.json
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/*
+
+# misc
+fullstack-challenge-angular/.sass-cache
+fullstack-challenge-angular/connect.lock
+fullstack-challenge-angular/coverage
+fullstack-challenge-angular/libpeerconnection.log
+fullstack-challenge-angular/npm-debug.log
+fullstack-challenge-angular/yarn-error.log
+fullstack-challenge-angular/testem.log
+fullstack-challenge-angular/typings
+
+# System Files
+fullstack-challenge-angular/.DS_Store
+fullstack-challenge-angular/Thumbs.db
