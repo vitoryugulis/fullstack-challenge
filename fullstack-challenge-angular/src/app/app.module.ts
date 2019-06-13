@@ -8,6 +8,7 @@ import { CoreModule } from './core/core.module';
 import { SpeciesComponent } from './components/species/species.component';
 import { AngularMaterialConfigurationModule } from './angular-material-configuration/angular-material-configuration.module';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     CoreModule,
     BrowserAnimationsModule,
     AngularMaterialConfigurationModule,
-    NgbModule 
+    NgbModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
