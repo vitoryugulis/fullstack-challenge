@@ -1,9 +1,9 @@
-# Informações
+# Fullstack Challenge API
 Esta solução consome os dados da SWAPI e retorna com informações específicas sobre espécies e personages. 
 Esta é a API do projeto, que é consumida pelo front-end em angular.
 
 # Instruções para rodar o projeto
-Instruções divididas entre API e Identity Server 
+Instruções divididas entre API de autorização e Fullstack Challenge API
 Siga as instruções em sequência.
 
 ## Requisitos
@@ -11,6 +11,7 @@ Siga as instruções em sequência.
 Windows:
 
 .Net Core SDK 2.2 compatível com Visual Studio 2017 https://dotnet.microsoft.com/download/thank-you/dotnet-sdk-2.2.107-windows-x64-installer
+
 Linux Ubuntu (no link tem como escolher a distro do linux, caso o seu não seja ubuntu):
 
 .NET Core SDK 2.2 https://dotnet.microsoft.com/download/linux-package-manager/ubuntu18-04/sdk-current
@@ -18,14 +19,14 @@ De preferência, abra o projeto utilizando o Visual Studio Code
 
 ## ASP.Net Core Identity Server (API de autorização)
 
-A partir da pasta raiz, navegar para a pasta "/fullstack-challenge" executar os seguintes comandos no terminal:
+A partir da pasta raiz, navegar para a pasta `"/fullstack-challenge"` executar os seguintes comandos no terminal:
 
-1. dotnet restore;
-2. dotnet build;
+1. `dotnet restore`;
+2. `dotnet build`;
 
-Em seguida, navegue para a pasta /fullstack-challenge/IdentityServer e execute o seguinte comando no terminal:
+Em seguida, navegue para a pasta `"/fullstack-challenge/IdentityServer"` e execute o seguinte comando no terminal:
 
-1. dotnet run;
+1. `dotnet run`;
 
 Swagger disponível no link abaixo após executar o comando dotnet run:
 1. http://localhost:5002/index.html
@@ -43,11 +44,11 @@ E com o seguinte body:
 }
 ```
 
-## ASP.Net Core WEB API
+## ASP.Net Core WEB API (Fullstack challenge API)
 
 A partir da pasta raiz, navegue para a pasta "/fullstack-challenge/API" e execute os seguintes comandos para subir a API:
 
-1. dotnet run.
+1. `dotnet run`;
 
 Após isso é só usar a API.
 

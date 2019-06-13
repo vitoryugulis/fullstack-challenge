@@ -12,7 +12,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Subindo a página
 
-A partir da pasta raiz do projeto, navegue para a pasta /fullstack-challenge-angular e execute os seguintes comandos no terminal:
+A partir da pasta raiz do projeto, navegue para a pasta `"/fullstack-challenge-angular"` e execute os seguintes comandos no terminal:
 
 1. `npm install`;
 1. `ng serve --open`;
